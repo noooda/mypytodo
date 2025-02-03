@@ -50,6 +50,10 @@ def test_default(mocker: Mock, load_data: list[dict]) -> None:
     mock_todo_repository.load.assert_called_once()
     assert len(todo_list) == 3
     assert isinstance(todo_list[0], Task)
+    assert (
+        todo_list[0].id
+        == '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'
+    )
     assert todo_list[0].start == 20250125
     assert todo_list[1].start == 20250201
     assert todo_list[2].start == 20250211
