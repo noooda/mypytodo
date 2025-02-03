@@ -1,3 +1,4 @@
+import os
 import tempfile
 import textwrap
 
@@ -51,14 +52,20 @@ def expected_load_data() -> list[dict]:
 def test_load_todo_list(
     yaml_content: str, expected_load_data: list[dict]
 ) -> None:
-    with tempfile.NamedTemporaryFile() as fp:
-        with open(fp.name, 'w') as f:
+    with tempfile.NamedTemporaryFile(mode='w', delete=False) as fp:
+        temp_file_path = fp.name
+        with open(temp_file_path, 'w') as f:
             f.write(yaml_content)
 
-        yaml_todo_repository = YamlTodoRepository(repository_path=fp.name)
+        yaml_todo_repository = YamlTodoRepository(
+            repository_path=temp_file_path
+        )
+
         load_data = yaml_todo_repository.load()
         assert len(load_data) == 2
         assert load_data == expected_load_data
+
+    os.remove(temp_file_path)
 
 
 def test_fail_to_load_todo_list() -> None:

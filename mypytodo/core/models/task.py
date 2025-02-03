@@ -15,11 +15,32 @@ class Task:
         self._start = start
         self._end = end
         self._description = description
-        self._repeat = repeat if repeat is True else False
+        self._repeat = False if repeat is None else repeat
+
+    @property
+    def title(self) -> str:
+        return self._title
+
+    @property
+    def status(self) -> str:
+        return self._status
+
+    @property
+    def priority(self) -> str:
+        return self._priority
 
     @property
     def start(self) -> int:
         return self._start
 
-    def is_repeat(self) -> bool | None:
+    @property
+    def end(self) -> int:
+        return self._end
+
+    @property
+    def description(self) -> str:
+        return self._description
+
+    @property
+    def repeat(self) -> bool | None:
         return self._repeat

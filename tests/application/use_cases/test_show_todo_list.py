@@ -11,15 +11,6 @@ from mypytodo.core.models import Task
 def load_data() -> list[dict]:
     return [
         {
-            'title': 'test',
-            'status': 'pending',
-            'priority': 'high',
-            'start': 20250125,
-            'end': 20250201,
-            'description': 'test test test',
-            'repeat': True,
-        },
-        {
             'title': 'test2',
             'status': 'ongoing',
             'priority': 'middle',
@@ -37,6 +28,15 @@ def load_data() -> list[dict]:
             'description': 'test test test test test',
             'repeat': True,
         },
+        {
+            'title': 'test',
+            'status': 'pending',
+            'priority': 'high',
+            'start': 20250125,
+            'end': 20250201,
+            'description': 'test test test',
+            'repeat': True,
+        },
     ]
 
 
@@ -48,5 +48,8 @@ def test_default(mocker: Mock, load_data: list[dict]) -> None:
 
     todo_list = list.default()
     mock_todo_repository.load.assert_called_once()
-    assert len(todo_list) == 2
+    assert len(todo_list) == 3
     assert isinstance(todo_list[0], Task)
+    assert todo_list[0].start == 20250125
+    assert todo_list[1].start == 20250201
+    assert todo_list[2].start == 20250211

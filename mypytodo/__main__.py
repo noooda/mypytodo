@@ -1,10 +1,16 @@
 import argparse
 
+from mypytodo.application.use_cases import ShowTodoList
+from mypytodo.infrastructure.repositories import YamlTodoRepository
+from mypytodo.presentation.cli import CommandHandler
+
 
 def main() -> None:
     parser = setup_parser()
+    command_handler = setup_command_handler()
+
     args = parser.parse_args()
-    print(args)
+    command_handler.call_process(args)
 
 
 def setup_parser() -> argparse.ArgumentParser:
@@ -23,6 +29,14 @@ def setup_parser() -> argparse.ArgumentParser:
     list_parser.add_argument('--update', type=str, help='Sort by a property')
 
     return parser
+
+
+def setup_command_handler() -> CommandHandler:
+    return CommandHandler(
+        show_todo_list=ShowTodoList(
+            todo_repository=YamlTodoRepository('todo_list.yaml')
+        )
+    )
 
 
 if __name__ == '__main__':
