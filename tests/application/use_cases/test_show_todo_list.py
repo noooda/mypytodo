@@ -3,7 +3,7 @@ from unittest.mock import Mock
 import pytest
 
 from mypytodo.application.interfaces import TodoRepository
-from mypytodo.application.use_cases import ShowTodoList
+from mypytodo.application.use_cases import GetTodoList
 from mypytodo.core.models import Task
 
 
@@ -44,7 +44,7 @@ def load_data() -> list[dict]:
 def test_default(mocker: Mock, load_data: list[dict]) -> None:
     mock_todo_repository = mocker.Mock(spec=TodoRepository)
     mock_todo_repository.load.return_value = load_data
-    list = ShowTodoList(mock_todo_repository)
+    list = GetTodoList(mock_todo_repository)
 
     todo_list = list.default()
     mock_todo_repository.load.assert_called_once()

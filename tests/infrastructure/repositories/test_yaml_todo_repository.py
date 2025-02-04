@@ -49,7 +49,7 @@ def expected_load_data() -> list[dict]:
     ]
 
 
-def test_load_todo_list(
+def test_get_todo_list(
     yaml_content: str, expected_load_data: list[dict]
 ) -> None:
     with tempfile.NamedTemporaryFile(mode='w', delete=False) as fp:
@@ -68,7 +68,7 @@ def test_load_todo_list(
     os.remove(temp_file_path)
 
 
-def test_fail_to_load_todo_list() -> None:
+def test_fail_to_get_todo_list() -> None:
     yaml_todo_repository = YamlTodoRepository(repository_path='not/exist.yaml')
     with pytest.raises(FileNotFoundError):
         yaml_todo_repository.load()

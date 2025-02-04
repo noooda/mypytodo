@@ -1,6 +1,6 @@
 import argparse
 
-from mypytodo.application.use_cases import ShowTodoList
+from mypytodo.application.use_cases import GetTodoList
 from mypytodo.infrastructure.repositories import YamlTodoRepository
 from mypytodo.presentation.cli import CommandHandler
 
@@ -33,7 +33,7 @@ def setup_parser() -> argparse.ArgumentParser:
 
 def setup_command_handler() -> CommandHandler:
     return CommandHandler(
-        show_todo_list=ShowTodoList(
+        get_todo_list=GetTodoList(
             todo_repository=YamlTodoRepository('todo_list.yaml')
         )
     )

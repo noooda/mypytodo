@@ -1,40 +1,33 @@
 import argparse
-from string import Template
 
-from mypytodo.application.use_cases import ShowTodoList
-from mypytodo.templates import TASK_DEFAULT
+from termcolor import colored
+
+from mypytodo.application.use_cases import GetTodoList
 
 
 class CommandHandler:
-    def __init__(self, show_todo_list: ShowTodoList) -> None:
-        self._show_todo_list = show_todo_list
+    def __init__(self, get_todo_list: GetTodoList) -> None:
+        self._get_todo_list = get_todo_list
+        self.todo_list = self._get_todo_list.execute()
 
     def list_cmd(self) -> None:
-        template = Template(TASK_DEFAULT)
-        todo_list = self._show_todo_list.default()
-
-        for i, task in enumerate(todo_list):
-            result = template.substitute(
-                id=task.id,
-                title=task.title,
-                status=task.status,
-                priority=task.priority,
-                start=task.start,
-                end=task.end,
-                repeat=task.repeat,
+        for task in self.todo_list:
+            output = (
+                f'{task.id}\n'
+                f'{task.title}\n'
+                f'{task.start}\n'
+                f'{task.end}\n'
             )
-
-            # TODO: 何かしらのRenderを実装した方が良さそう
-            # TODO: repeatがTrueかどうかは色の濃さで判断させたい
-            print('-' * 20)
-            print(result)
-            if i + 1 == len(todo_list):
-                print('-' * 20)
+            if task.priority == 'high':
+                print(colored(output, 'red'))
+            elif task.priority == 'middle':
+                print(colored(output, 'yellow'))
+            else:
+                print(output)
 
     # TODO: list --detailだったり、list --filter title="hoge"に対応できるか考える
     def call_process(self, args: argparse.Namespace) -> None:
         command = args.command
-        print(args)
 
         action = getattr(self, f'{command}_cmd')
         action()
