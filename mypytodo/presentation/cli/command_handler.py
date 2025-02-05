@@ -1,8 +1,7 @@
 import argparse
 
-from termcolor import colored
-
 from mypytodo.application.use_cases import GetTodoList
+from mypytodo.presentation.cli.renderer import TaskRenderer
 
 
 class CommandHandler:
@@ -12,18 +11,7 @@ class CommandHandler:
 
     def list_cmd(self) -> None:
         for task in self.todo_list:
-            output = (
-                f'{task.id}\n'
-                f'{task.title}\n'
-                f'{task.start}\n'
-                f'{task.end}\n'
-            )
-            if task.priority == 'high':
-                print(colored(output, 'red'))
-            elif task.priority == 'middle':
-                print(colored(output, 'yellow'))
-            else:
-                print(output)
+            TaskRenderer.render(task)
 
     # TODO: list --detailだったり、list --filter title="hoge"に対応できるか考える
     def call_process(self, args: argparse.Namespace) -> None:
