@@ -9,13 +9,12 @@ class CommandHandler:
         self._get_todo_list = get_todo_list
         self.todo_list = self._get_todo_list.execute()
 
-    def list_cmd(self) -> None:
-        for task in self.todo_list:
-            TaskRenderer.render(task)
+    def list_action(self, detail: bool, query: str | None = None) -> None:
+        TaskRenderer.render(self.todo_list, detail)
 
-    # TODO: list --detailだったり、list --filter title="hoge"に対応できるか考える
     def call_process(self, args: argparse.Namespace) -> None:
         command = args.command
+        del args.command
 
-        action = getattr(self, f'{command}_cmd')
-        action()
+        action = getattr(self, f'{command}_action')
+        action(**vars(args))

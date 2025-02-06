@@ -20,13 +20,27 @@ def setup_parser() -> argparse.ArgumentParser:
 
     subparsers = parser.add_subparsers(dest='command', required=True)
 
-    list_parser = subparsers.add_parser('list', help='Shot todo list')
-    list_parser.add_argument('--detail', action='store_true', help='Show all')
-    list_parser.add_argument('--query', type=str, help='Sort by a property')
+    list_parser = subparsers.add_parser('list', help='Show todo list')
+    list_parser.add_argument(
+        '--detail', action='store_true', help='Show in detail'
+    )
+    list_parser.add_argument('--query', type=str, help='Sort by the query')
 
-    list_parser = subparsers.add_parser('edit', help='Shot todo list')
-    list_parser.add_argument('--new', action='store_true', help='Show all')
-    list_parser.add_argument('--update', type=str, help='Sort by a property')
+    list_parser = subparsers.add_parser('edit', help='Edit a task')
+    list_parser.add_argument(
+        '--id', required=True, type=str, help='Specify task id'
+    )
+    list_parser.add_argument('--title', type=str, help='New title')
+    list_parser.add_argument('--priority', type=str, help='New priority')
+    list_parser.add_argument('--start', type=str, help='New start')
+    list_parser.add_argument('--end', type=str, help='New end')
+    list_parser.add_argument('--description', type=str, help='New description')
+    list_parser.add_argument('--repeat', type=str, help='True or Blank')
+
+    list_parser = subparsers.add_parser('remove', help='Remove a task')
+    list_parser.add_argument(
+        '--id', required=True, type=str, help='Specify task id'
+    )
 
     return parser
 
