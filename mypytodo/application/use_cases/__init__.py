@@ -1,3 +1,3 @@
-from .show_todo_list import ShowTodoList
+from .get_todo_list import GetTodoList
 
-__all__ = ['ShowTodoList']
+__all__ = ['GetTodoList']

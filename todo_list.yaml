@@ -1,42 +1,36 @@
-- title: Take online English lesson
-  status: ongoing
+- repeat: True 
+  title: Take online English lesson
   priority: middle
   start: 20250101
   end: 20250125
   description: Taking online English lesson is important
-  repeat: True 
-- title: Code my app
-  status: pending
-  priority: high
+- repeat:
+  title: Code my app
+  priority: low 
   start: 20250110
   end: 20250201
   description: I need more practice
-  repeat:
-- title: Read some books 
-  status: canceled 
+- repeat: True
+  title: Read some books 
   priority: low 
   start: 20250211
   end: 20250215
   description: I have no time to read 
-  repeat:
-- title: Write a blog post 
-  status: late 
+- repeat:
+  title: Write a blog post 
   priority: high
   start: 20250115
   end: 20250201
   description: I have a job to do 
-  repeat:
-- title: Run 5km 
-  status: done 
-  priority: middle 
+- repeat:
+  title: Run 5km 
+  priority: low 
   start: 20250123
   end: 20250125
   description: It was a good run 
-  repeat:
-- title: Clean my room 
-  status: ongoing
+- repeat:
+  title: Clean my room 
   priority: middle
   start: 20250101
   end: 20250214
   description: I will shop for cleaning supplies 
-  repeat:
