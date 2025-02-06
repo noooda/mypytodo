@@ -21,8 +21,8 @@ def setup_parser() -> argparse.ArgumentParser:
     subparsers = parser.add_subparsers(dest='command', required=True)
 
     list_parser = subparsers.add_parser('list', help='Shot todo list')
-    list_parser.add_argument('--all', action='store_true', help='Show all')
-    list_parser.add_argument('--sort', type=str, help='Sort by a property')
+    list_parser.add_argument('--detail', action='store_true', help='Show all')
+    list_parser.add_argument('--query', type=str, help='Sort by a property')
 
     list_parser = subparsers.add_parser('edit', help='Shot todo list')
     list_parser.add_argument('--new', action='store_true', help='Show all')

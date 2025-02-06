@@ -37,7 +37,6 @@ def load_data() -> list[dict]:
     ]
 
 
-# TODO: default()の実装が変わったので、テストを修正する
 def test_default(mocker: Mock, load_data: list[dict]) -> None:
     mock_todo_repository = mocker.Mock(spec=TodoRepository)
     mock_todo_repository.load.return_value = load_data
